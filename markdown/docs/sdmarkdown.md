@@ -1,6 +1,6 @@
-#Cách sử dụng ngôn ngữ Markdown
+# Cách sử dụng ngôn ngữ Markdown
 
-#1.Phần tiêu đề
+# 1.Phần tiêu đề
 
 ```
 # H1
@@ -9,16 +9,16 @@
 # H1
 
 ``` 
-##H2
+## H2
 
 ```
-##H2
+## H2
 
 ```
-###H3
+### H3
 
 ```
-###H3
+### H3
 
 Tương tự như vậy các tiêu đề cấp sau thì thêm nhiều dấu `#` hơn
 
@@ -40,7 +40,7 @@ Ví dụ 2
 Ví dụ 2
 -------
 
-#2.Nhấn mạnh
+# 2.Nhấn mạnh
 
 Có nhiều cách để nhấn mạnh
 
@@ -50,7 +50,7 @@ Có nhiều cách để nhấn mạnh
 
 - Để gạch thêm nhấn mạnh bằng cách gạch ngang chữ ta dùng ` ~~ Từ gạch ~~` sẽ ra ~~ Từ gạch ~~
 
-#3.Danh sách
+# 3.Danh sách
 
 Thực hiện
 
@@ -72,7 +72,7 @@ thì kết quả sẽ là
 
 `chú ý` là các mục cùng cấp thì đề đầu dàng thẳng hàng nhau. Nếu là thư mục con thì lùi vào trong.
 
-#4.Chèn link
+# 4.Chèn link
 
 Có nhiều cách để chèn link
 
@@ -96,7 +96,7 @@ Ta cũng có thể đặt link trực tiếp luôn
 
 https://www.google.com
 
-#5.Chèn ảnh
+# 5.Chèn ảnh
 
 Chèn ảnh ta có 2 cách như cách chèn link đầu tiên
 
@@ -114,7 +114,7 @@ Chèn ảnh ta có 2 cách như cách chèn link đầu tiên
 
 [logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "phần mô tả khi trỏ vào ảnh"
 
-#6.Đánh dấu code và cú pháp
+# 6.Đánh dấu code và cú pháp
 
 Để bo chữ ta dùng kí tự ` ` chữ cần bo` `
 
@@ -153,7 +153,7 @@ var s = "JavaScript syntax highlighting";
 alert(s);
 ```
 
-#7. Bảng
+# 7. Bảng
 
 ```
 | dòng | cột 1 | cột 2 | Cột 3 |
@@ -167,18 +167,20 @@ alert(s);
 |dòng 1 | 1 | 2 | 3 |
 |Dòng 2 | 4 | 5 | 6 |
 
-#8.Tạo dòng chú thích
+# 8.Tạo dòng chú thích
 
 ```
 
 Cái này có nghĩa là:
 
 > ý nghĩa 1
+
 > ý nghĩa 2
 ```
 
 Cái này có nghĩa là:
 
 > ý nghĩa 1
+
 > ý nghĩa 2
 
