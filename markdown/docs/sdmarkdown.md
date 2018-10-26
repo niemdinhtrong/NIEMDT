@@ -20,7 +20,7 @@
 
 [9.Tạo dấu gạch ngang](#gachngang)
 
-<a name="phantieude"></>
+<a name="phantieude">
 # 1.Phần tiêu đề
 
 ```
@@ -61,7 +61,7 @@ Ví dụ 2
 Ví dụ 2
 -------
 
-<a name="nhanmanh"></>
+<a name="nhanmanh">
 # 2.Nhấn mạnh
 
 Có nhiều cách để nhấn mạnh
@@ -72,7 +72,7 @@ Có nhiều cách để nhấn mạnh
 
 - Để gạch thêm nhấn mạnh bằng cách gạch ngang chữ ta dùng ` ~~ Từ gạch ~~` sẽ ra ~~ Từ gạch ~~
 
-<a name="danhsach"></>
+<a name="danhsach">
 # 3.Danh sách
 
 Thực hiện
@@ -108,7 +108,7 @@ thì kết quả sẽ là
 
 `chú ý` là các mục cùng cấp thì đề đầu dàng thẳng hàng nhau. Nếu là thư mục con thì lùi vào trong.
 
-<a name="chenlink"></>
+<a name="chenlink">
 # 4.Chèn link
 
 Có nhiều cách để chèn link
@@ -133,7 +133,7 @@ Ta cũng có thể đặt link trực tiếp luôn
 
 https://www.google.com
 
-<a name="chenanh"></>
+<a name="chenanh">
 # 5.Chèn ảnh
 
 Chèn ảnh ta có 2 cách như cách chèn link đầu tiên
@@ -148,11 +148,11 @@ Chèn ảnh ta có 2 cách như cách chèn link đầu tiên
 [logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "phần mô tả khi trỏ vào ảnh"
 ```
 
-![](logo]
+![][logo]
 
 [logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "phần mô tả khi trỏ vào ảnh"
 
-<a name="danhdaucode"></>
+<a name="danhdaucode">
 # 6.Đánh dấu code và cú pháp
 
 Để bo chữ ta dùng kí tự ` ` chữ cần bo` `
@@ -191,7 +191,7 @@ alert(s);
 var s = "JavaScript syntax highlighting";
 alert(s);
 ```
-<a name="taobang"></>
+<a name="taobang">
 # 7.Tạo bảng
 
 ```
@@ -206,7 +206,7 @@ alert(s);
 |dòng 1 | 1 | 2 | 3 |
 |Dòng 2 | 4 | 5 | 6 |
 
-<a name="chuthich"></>
+<a name="chuthich">
 # 8.Tạo dòng chú thích
 
 ```
@@ -224,7 +224,7 @@ Cái này có nghĩa là:
 
 > ý nghĩa 2
 
-<a name="gachngang"></>
+<a name="gachngang">
 # 9.Tạo dấu gạch ngang
 
 ```
