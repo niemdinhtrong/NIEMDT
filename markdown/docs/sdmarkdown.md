@@ -1,5 +1,18 @@
 # Cách sử dụng ngôn ngữ Markdown
 
+## Mục lục
+
+[1.Phần tiêu đề]
+[2.Nhấn mạnh]
+[3.Danh sách]
+[4.Chèn link]
+[5.Chèn ảnh]
+[6.Đánh dấu code và cú pháp]
+[7.Bảng]
+[8.Tạo dòng chú thích]
+[9.Tạo dấu gạch ngang]
+
+
 # 1.Phần tiêu đề
 
 ```
@@ -54,7 +67,20 @@ Có nhiều cách để nhấn mạnh
 
 Thực hiện
 
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/markdown/images/Screenshot_9.png)
+```
+
+1. Mục 1
+
+2. Mục 2
+
+ * Muc 2.1
+ 
+ * Mục 2.2
+     
+     - Mục 2.2.1
+
+3. Mục 3
+```
 
 thì kết quả sẽ là 
 
@@ -153,7 +179,7 @@ var s = "JavaScript syntax highlighting";
 alert(s);
 ```
 
-# 7. Bảng
+# 7.Bảng
 
 ```
 | dòng | cột 1 | cột 2 | Cột 3 |
@@ -183,4 +209,30 @@ Cái này có nghĩa là:
 > ý nghĩa 1
 
 > ý nghĩa 2
+
+# 9.Tạo dấu gạch ngang
+
+```
+
+Dòng 1...
+
+----
+
+Dòng 2
+
+***
+
+Dòng 3
+```
+Dòng 1...
+
+----
+
+Dòng 2
+
+***
+
+Dòng 3
+
+
 
