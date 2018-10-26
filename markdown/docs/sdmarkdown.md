@@ -2,15 +2,23 @@
 
 ## Mục lục
 
-[1.Phần tiêu đề]
-[2.Nhấn mạnh]
-[3.Danh sách]
-[4.Chèn link]
-[5.Chèn ảnh]
-[6.Đánh dấu code và cú pháp]
-[7.Bảng]
-[8.Tạo dòng chú thích]
-[9.Tạo dấu gạch ngang]
+[1.Phần tiêu đề][#1]
+
+[2.Nhấn mạnh][#2.nhấn-mạnh]
+
+[3.Danh sách][#3]
+
+[4.Chèn link][#chèn-link]
+
+[5.Chèn ảnh][#5]
+
+[6.Đánh dấu code và cú pháp][6]
+
+[7.Bảng][#7]
+
+[8.Tạo dòng chú thích][#8]
+
+[9.Tạo dấu gạch ngang][#9]
 
 
 # 1.Phần tiêu đề
