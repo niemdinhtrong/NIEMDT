@@ -2,23 +2,23 @@
 
 ## Mục lục
 
-[1.Phần tiêu đề][#1]
+[1.Phần tiêu đề](#1)
 
-[2.Nhấn mạnh][#2.nhấn-mạnh]
+[2.Nhấn mạnh](#2.nhấn-mạnh)
 
-[3.Danh sách][#3]
+[3.Danh sách](#3)
 
-[4.Chèn link][#chèn-link]
+[4.Chèn link](#chèn-link)
 
-[5.Chèn ảnh][#5]
+[5.Chèn ảnh](#5)
 
-[6.Đánh dấu code và cú pháp][6]
+[6.Đánh dấu code và cú pháp](6)
 
-[7.Bảng][#7]
+[7.Bảng](#7)
 
-[8.Tạo dòng chú thích][#8]
+[8.Tạo dòng chú thích](#8)
 
-[9.Tạo dấu gạch ngang][#9]
+[9.Tạo dấu gạch ngang](#9)
 
 
 # 1.Phần tiêu đề
