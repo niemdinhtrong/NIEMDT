@@ -10,25 +10,36 @@ Có nhiều loại ổ cứng khác nhau nhưng được sử dụng nhiều nh�
 
 ![](https://github.com/niemdinhtrong/NIEMDT/blob/master/Disk/images/cautaodisk.jpg)
 
-* Đĩa từ (platter) đĩa thường được cấu tạo bằng nhôm hay thủy tinh, trên bề mặt được phủ một lớp vật liệu từ tính là nơi lưu trữ dữ liệu. Số lượng đĩa có thể nhiều hơn 1 phụ thuộc vào dung lượng và công nghệ của các hãng sản xuất. **Đĩa cứng** có thể gồm nhiều đĩa từ gắn song song, quay đồng trục và có cùng tốc độ quay.
+* Đĩa từ (platter) đĩa thường được cấu tạo bằng nhôm hay thủy tinh, trên bề mặt được phủ một lớp vật liệu từ
+ tính là nơi lưu trữ dữ liệu. Số lượng đĩa có thể nhiều hơn 1 phụ thuộc 
+ vào dung lượng và công nghệ của các hãng sản xuất. **Đĩa cứng** có thể gồm nhiều đĩa
+ từ gắn song song, quay đồng trục và có cùng tốc độ quay.
+
+* Mô tơ dùng để gắn cụm đĩa lên. Mô tơ có tốc độ quay rất lớn từ 5000 đến 7000 vòng/phút
+
+* Đầu đọc/ghi có thể di chuyển nhờ bộ điều khiển. Kết hợp với sự quay của đĩa đầu đọc/ghi có thể đến 
+bất kỳ vị trí vào trên mặt đĩa để đọc và ghi dữ liệu.
+Trên một mặt đĩa có cả đầu đọc và đầu ghi.
+
+* Phần bo mạch có nhiệm vị giao tiếp với máy tính.
 
 * Các đĩa từ được chia ra thành các đường tròn đồng tâm nó được gọi là **track**.
 Các track này không cố định mà nó có thể thay đổi khi ta thực hiện formart ổ đĩa.
 
-* Các track được chia thành các miền hướng từ tâm ra gọi là **sector**
+* Các track được chia thành các miền hướng từ tâm ra gọi là **sector**.
+Mỗi sector tương đương với 512 bytes
 
-* Cylinder: tập hợp các track cùng bán kính ở các đĩa khác nhau thành các `cylinder`. Khi đầu đọc/ghi đầu tiên làm việc tại một track nào tập hợp các track trên các đĩa còn lại mà các đầu đọc ghi ocnf lại đang làm việc gọi là culinder.
+* Cylinder: tập hợp các track cùng bán kính ở các đĩa khác nhau thành các `cylinder`. Khi đầu đọc/ghi đầu tiên làm việc tại một track
+ nào tập hợp các track trên các đĩa còn lại mà các đầu đọc ghi ocnf lại đang làm việc gọi là culinder.
 
 ![](https://github.com/niemdinhtrong/NIEMDT/blob/master/Disk/images/track.png)
 
 * Dữ liệu được ghi và đọc thông qua đầu đọc ghi. Tại vị trí cần đọc ghi các đầu đọc ghi có bộ cảm biến với điện trường để đọc dữ liệu
 Tại vị trí cần ghi dữ liệu đầu đọc ghi phát ra điệ trường để xoay hướng các hạt từ để ghi dữ liệu.
 
-* Trên 1 đĩa từ có cả 2 đầu là đầu đọc và đầu ghi. Dữ liệu được đọc ghi đồng thời trên tất cả các đĩa từ. Việc thực hiện phân bổ dữ liệu như thế nào là do bo mạch của ổ cứng.
+* Dữ liệu được đọc ghi đồng thời trên tất cả các đĩa từ. Việc thực hiện phân bổ dữ liệu như thế nào là do bo mạch của ổ cứng.
 
 * Bộ điều khiển truyền động được làm từ nam châm vĩnh cửu. Nó dùng để điều khiểu đầu đọc ghi thông qua tay truyền động.
-
-* Trục quay dùng để gắn các đĩa từ lên. Nó có tốc độ quay rất lớn khoảng 5000 đến 7000 vòng/phút.
 
 * Cụm mạch điện gồm các bộ phận như mạch điều khiển, mạch xử lý dữ liêu, bộ nhớ đệm, các cổng kết nối.
  
@@ -40,6 +51,15 @@ Tại vị trí cần ghi dữ liệu đầu đọc ghi phát ra điệ trườn
   
   - Cổng kết nối để nối với nguồn điện và với máy tính.
 
+* Có 2 chuẩn ổ cứng là MBR và GPT
+
+* Các chuẩn giao tiếp:
+  - PATA/ATA/IDE (tốc độ thấp dưới 133Mb/s)
+  
+  - SATA (tốc độ cao 150 đến 600 Mb/s)
+  
+  - SCSI (Tốc độ cao, xử lý các file lớn thường dùng trong server)
+  
 ## 4. Ổ cứng SSD
 
 Ổ cứng SSD là ổ loại ổ đĩa cứng. Nó không lưu dữ liệu trên bề mặt đĩa từ như ổ HDD mà dữ liệu được lưu trên các Chip bộ nhớ flash kết hợp lại với nhau.
