@@ -13,7 +13,7 @@ Trong linux chia làm 2 kiểu người dùng là `user` và `root`
  
 Trong linux bất kỳ một file hoặc một thư mục nào cũng chia ra 3 quyền cho 3 nhóm người dùng khác nhau.
 
-** - Ba quyền là quyền:**
+## Ba quyền là quyền:
 
     * Read `r` là quyền chỉ được đọc đối với thư mục hoặc file
 	
@@ -21,7 +21,7 @@ Trong linux bất kỳ một file hoặc một thư mục nào cũng chia ra 3 q
 	
 	* Excuted `x` là quyền thực thi đối với thư mục hoặc file. Quyền này thể hiện rõ đối với các file thực thi và các thư mục. 
 	
-** - Ba nhóm người dùng là:**
+## Ba nhóm người dùng là:
 
     * Người sở hữu với thư mục hoặc file (user). Thường mặc định được cấp cho người tạo ra thư mục hoặc file.
 	
@@ -29,11 +29,11 @@ Trong linux bất kỳ một file hoặc một thư mục nào cũng chia ra 3 q
 	
 	* Những người dùng còn lại (other). Là những người dùng không phải người sở hữu và không có tên trong nhóm sở hữu thư mục hoặc file đó.
 
-** - Các lệnh cơ bản với user và group:**
+## Các lệnh cơ bản với user và group:
 
     * Tạo user: `useradd tên_user`
 	
-	* Đặt password cho user: `passwd tên_user`
+    * Đặt password cho user: `passwd tên_user`
 	
 	* Tạo group: `groupadd tên_group`
 	
@@ -51,7 +51,7 @@ Trong linux bất kỳ một file hoặc một thư mục nào cũng chia ra 3 q
 	
 	* *Lưu ý:* có thể tạo được nhiều user và nhiều group. Một user có thể tham gia vào được nhiều group.
 	
-** - Các lệnh để thay đổi quyền đối với thư mục**
+## Các lệnh để thay đổi quyền đối với thư mục
 
     * Để xem các quyền của một thư mục hoặc một file: ` ls -l tên_thư_mục_hoặc_file`. *Chú ý* tên thư mục hoặc file ở đây là đường dẫn đến với thư mục hoặc file đó.
 	
