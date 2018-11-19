@@ -3,7 +3,14 @@ Trước tiên cần hiểu LVM linear và striped là gì. Hiểu đơn giản 
 
 Để dễ hình dung ta coi 1 máy có 5 ổ cứng mỗi ổ 500G và ta chỉ tạo ra 5 physical volume. Ta gom 5 physical volume này lại thành một volume group. Và ta chỉ tạo ra duy nhất 1 logical volume từ group volume này. Ta tiến hành `mount` nó vào một thư mục và có thể dùng được. Như vậy thư mục đó sẽ bao gồm cả 5 disk ta tạm gọi là `disk1` `disk2` `disk3` `disk4` và `disk5`.
  * `Linear` nếu ta có dữ liệu 700G muốn lưu vào thư mục vừa rồi thì nó sẽ ghi như sau. Nó sẽ tiến hành ghi dữ liệu vào `disk1` đến khi dung lượng `fisk1` hết nói sẽ tiếp tục ghi sang `disk2` và cứ tiếp tục như thế. Như ví dụ trên nó sẽ ghi vào `disk1` 500G và `disk2` 200G.
+
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/linux/images/li01.gif)
+
+
  * `Striped`với kiểu này dữ liệu sẽ được chia đều ra các disk cho dù dữ liệu đó chỉ có thể ghi trọn vẹn trong 1 disk. Vd ta có dữ liệu 100G muốn lưu vào thư mục vừa rồi thì nó sẽ lưu vào `disk1` 1G(dung lượng này có thể tùy chỉnh trong lúc tạo striped logical volume) `disk2` 1G nó cứ làm như thế đến `disk5` 1G và nó lại lặp lại `disk1` 1G nó cứ ghi như thế đến khi hết 100G dữ liệu kia thì thôi.
+
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/linux/images/li02.gif)
+
 
 ## Cách cài đặt 
 ### LVM linear
