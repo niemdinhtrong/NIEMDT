@@ -22,7 +22,7 @@ Với lệnh `crontab -e` ta tiến hành ghi vào đó như ta ghi vào 1 file 
  * `crontab -l` hiển thị file crontab
  * `crontab -r` xóa file crontab
 
-Thông thường các máy đã đều được cài sẵn `crontab` tuy nhiên vẫn có trường hợp không có. Nếu dùng lệnh `crontab -l` mà được trả lại `-bash: crontab: command not found` thì ta cần cài `crontab` thủ công. Ta dùng lệnh sau để cài:
+Thông thường các máy đã đều được cài sẵn `crontab` tuy nhiên vẫn có trường hợp không có. Nếu dùng lệnh `crontab -l` mà được trả lại `-bash: crontab: command not found` thì ta cần cài `crontab` thủ công. Ta cũng có thể kiểm tra xem nó đã được cài chưa bằng cách dùng lệnh `yum list installed | grep crontab` nếu nó đã được cài thì ta sẽ thấy kết quả trả về. Nếu chưa được cài sẵn ta dùng lệnh sau để cài:
  * `yum install cronie`
 Sau đó khởi động nó và để nó tự động chạy mõi khi reboot bằng cách nhaaoj vào các lệnh sau:
  * `service crond start`

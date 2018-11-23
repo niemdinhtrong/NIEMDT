@@ -128,6 +128,17 @@ Các tùy chọn ta cơ bản:
 	 - noerror : Tiếp tục sao chép dữ liệu khi đầu vào bị lỗi.
 	 
 	 -rsync: Đồng bộ dữ liệu với ổ đang sao chép sang.
+
+*Lưu ý*: Đơn vị mặc định mỗi lần đọc được tính theo kb. Chúng ta có thể sử dụng một số tùy chọn sau để thay đổi định dạng:
+ * c=1
+ * w=2
+ * b=512
+ * kB=1000
+ * K=1024
+ * MB=1000*1000
+ * M=1024*1024
+ * GB=1000 * 1000 * 1000
+ * G=1024 * 1024 * 1024
 	 
 ## 3. Ví dụ 
 
