@@ -73,12 +73,14 @@ Ta lưu nó lại và thế là ta đã cấu hình xong iSCSI trên server
 Tiếp theo ta phải bật và khỏi động lại dịch vụ target
 Lệnh: 
 `systemctl restart target.service`
+
 `systemctl enable target.service`
 
 ![](https://github.com/niemdinhtrong/NIEMDT/blob/master/linux/images/scsi13.png)
 
 Tắt firewall để client có thể truy cập vào.
 `firewall-cmd --permanent --add-port=3260/tcp`
+
 `firewall-cmd --reload`
 
 ![](https://github.com/niemdinhtrong/NIEMDT/blob/master/linux/images/scsi14.png)
@@ -96,7 +98,7 @@ Tiến hành sửa file `/etc/iscsi/initiatorname.iscsi` để giống với ACL
 
 Sử dụng tiện ích `iscsiadm` để tìm kiếm, đăng nhập, đăng xuất các targets iSCSI.
 Để có được danh sách các target trên server ta thực hiện cú pháp sau:
-`iscsiadm -m discovery -t st IP_server`
+`iscsiadm -m discovery -t st -p IP_server`
 Trong ví dụ này server của tôi có địa chỉ IP: 192.168.169.129
 
 ![](https://github.com/niemdinhtrong/NIEMDT/blob/master/linux/images/scsi15.png)
@@ -114,3 +116,9 @@ Bây giờ ta kiểm tra đã có 1 disk mới được thêm vào
 Để sử dụng nó ta tiến hành phân vùng format và mount nó vaò thư mục và sử dụng bình thường như khi ta gán trực tiếp vào máy của ta.
 
 ![](https://github.com/niemdinhtrong/NIEMDT/blob/master/linux/images/scsi18.png)
+
+Để logout khỏi iSCSI targets ta cũng có 2 cách để đăng xuất như khi ta đăng nhập vào. 
+`iscsiadm -m node -u` để đăng xuất ra khỏi tất cả các target ta đang đăng nhập.
+`iscsiadm -m node -u -T tên_target -p IP` để đăng xuất khỏi một target mà ta chỉ ra.
+
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/linux/images/scsi19.png)
