@@ -39,7 +39,7 @@ Trong linux bất kỳ một file hoặc một thư mục nào cũng chia ra 3 q
 	
  * Đặt mật khẩu cho group: `gpasswd tên_group`
 	
- * Thêm 1 user vào 1 group: `usermod -D tên_group tên_user`
+ * Thêm 1 user vào 1 group: `usermod -G tên_group tên_user`
 	
  * Xóa 1 user ra khỏi 1 group: `gpasswd -d tên_user tên_group`
 	
