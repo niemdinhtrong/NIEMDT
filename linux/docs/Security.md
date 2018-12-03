@@ -102,6 +102,13 @@ Trước tiên ta tạo key trên máy client. Sử dụng lệnh
 
 Ta thấy khi tạo key nó hỏi ta chỗ lưu file. Bạn có thể chọn chỗ lưu nhưng thường sẽ để mặc định bằng cách nhấn `enter`
 Và sẽ được hỏi `passphrase` bạn có thể nhập hoặc không để bảo vệ private key của bạn. Nếu bạn nhập thì hãy nhớ mật khẩu này.
+###### Một số option của câu lệnh `ssh-keygen`
+ * `-b` sau đó là số bit để định số bit cho key.
+ * `-t` để định thuật toán tạo key. Có các loại sau: rsa, dsa, ecdsa, ed25519. Nếu không có option này thì mặc định sẽ là `rsa`
+ * `-f` để chọn chọn vị trí lưu file key.
+ * `-p` để thay đổi passphrase. Cú pháp `ssh-keygen -p -P pass_cũ -N pass_mới -f keyfile`
+ * `-y` để tạo một public key từ 1 private key.
+Đây là một số option thông dụng để biết thêm các option khác ta sử dụng lệnh `ssh-keygen --help`
 Ta kiểm tra bằng cách cd vào thư mục `.ssh` và kiểm tra trong xem đã có file chưa.
 
 ![](https://github.com/niemdinhtrong/NIEMDT/blob/master/linux/images/ssh4.png)
@@ -154,6 +161,19 @@ Bây giờ ta không thể SSH vào máy bằng tài khoản `root` được n�
 
 Ta cũng có thể giới hạn những user có thể login SSH vào hệ thống bằng cách vào file `/etc/ssh/sshd_config` tìm dòng `AllowUsers` và thêm những user bạn cho phép dùng SSH để login vào.
 Ví dụ ở đâu tôi chỉ cho user `client1` và `client2` dùng ssh để login vào hệ thống thì tôi thêm như sau: `AllowUsers client1 client2`
+
+*Chú ý*: Ta cũng có thể tạo ra public key từ một private key có sẵn bằng cách sử dụng lệnh `ssh-keygen -y -f file_private_key > file_public_key`
+Trong đó:
+ * `file_private_key` là file chứa key private mà ta muốn tạo một public key từ key đó.
+ * `file_public_key ` là file mà ta sẽ lưu public key mới tạo ra.
+
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/linux/images/ssh01.png)
+
+Như ví dụ trên tôi đã tạo ra một public key nữa và tôi đặt nó trong file `id_rsa1.pub`
+
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/linux/images/ssh02.png)
+
+Chúng ta có thể thấy rằng 1 private key có thể sinh ra rất nhiều các public key. Và các public key này là khác nhau nhưng vẫn sẽ được giải mã bằng private key mà chúng được sinh ra.
 
 ### Sử dụng SCP để copy dữ liệu giữa 2 máy linux
 `SCP` là một ứng dụng sử dụng giao thức `SSH` để copy dữ liệu giữa 2 máy linux. 
