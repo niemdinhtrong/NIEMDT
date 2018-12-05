@@ -5,10 +5,18 @@
 [4. Sed](#sed)
 [5. Grep](#grep)
 [6. Awk](#awk)
+[7. Sort](#sort)
+[8. Uniq](#uniq)
+[9. Paste](#paste)
+[10. Join](#join)
+[11. Tr](#tr)
+[12. Wc](#wc)
+[13. Tee](#tee)
+[14. Cut](#cut)
 
 <a name = "echo">
 
-# echo
+# 1. echo
 `echo` là một câu lệnh để hiển thị một đoạn văn bản lên màn hình
 
 Cú pháp `echo -option ký_tự`
@@ -78,7 +86,7 @@ day là file 1
 
 <a name = "export">
 
-# Export
+# 2. Export
 `export` là một trong các lệnh bash shell. Lệnh `export` đánh dấu một biến môi trường được `export` với bất kỳ quy trình con mới được chia nhỏ và do đó nó cho phép một tiến trình con kế thừa tất cả các biến được đánh dấu.
 ### Option
  * `-p` hiển thị danh sách tên được export trong shell hiện tại`.
@@ -162,7 +170,7 @@ Sau đó khi ta gõ hàm đó thì nó sẽ tự động thực hiện hàm đó
 
 <a name = "cat">
 
-# Cat
+# 3. Cat
 `cat` là lệnh được dùng để đọc một file.
 ### Một số option
  * `cat tên_file` để đọc một file(chỉ rõ đường dẫn đến file nếu không đứng ở thư mục chứa file đó)
@@ -245,7 +253,7 @@ day la file 3
 
 <a name = "sed">
 
-# Sed
+# 4. Sed
 `sed` là một trong những công cụ mạnh mẽ trong Linux giúp ta có thể thực hiện các theo tác với văn bản như tìm kiếm, chỉnh sửa, xóa,...Khác với các trình soạn thảo thông thường, `sed` chấp nhận văn bản đầu vào có thể là một file trên hệ thống hoặc từ standard input hay stdin. Chính vì vậy `sed` còn được gọi là `stream editor`
 ## Một số option hay dùng
  * `-n` ngăn chặn việc tự dộng in không gian mẫu.
@@ -292,7 +300,7 @@ AbC
 
 <a name = "grep">
 
-# grep
+# 5. grep
 `grep` là lệnh được dùng để tìm kiếm một chuỗi trong file chỉ định.
 ### 1. Tìm một chuỗi trong một file
 Nếu muốn tìm một chuỗi nào đó trong file duy nhất thì có thể dùng theo cú pháp sau:
@@ -336,7 +344,7 @@ VD `yum list installed | grep dd` để kiểm tra xem câu lệnh `dd` đã đ�
 
 <a name = "awk">
 
-# awk
+# 6. awk
 `awk` được sử dụng để trích xuất sau đó in nội dung cụ thể của một tệp và thường được sử dụng để tạo báo cáo. Nó là một tiện ích mạnh mẽ và ngôn ngữ lập trình được giải thích, được sử dụng để thao tác các file dữ liệu, truy xuất và xử lý văn bản. Nó hoạt động tốt với các trường (chứa một phần dữ liệu duy nhất, về cơ bản là một cột) và các bản ghi (một tập các trường, về cơ bản là một dòng trong một lệnh).
 Cú pháp `awk 'BEGIN{commands 1} pattern {commnads 2} END{commands 3}' tên_file`
 Trong đó:
@@ -388,3 +396,182 @@ VD
  * sub(regex, replacement_str, string): Thay thế chuỗi đầu tiên trùng khớp với biểu thức chính quy (regex) bằng chuỗi thay thế (replacement_str).
  * gsub(regex, replacement_str, string): Tương tự với hàm sub(), nhưng nó thay thế mọi trường hợp trùng khớp với biểu thức chính quy (regex).
  * match(regex, string): Trả về kết quả là 1 chuỗi trùng khớp với biểu thức chính quy (regex) có được tìm thấy trong string hay không. Nó trả về kết quả khác 0 nếu có trùng khớp, ngược lại thì trả về 0. 2 biến đặc biệt tương ứng với hàm match() là RSTART và RLENGTH. Biến RSTART chứa vị trí nơi chuỗi trùng khớp bắt đầu. Biến RLENGTH chứa độ dài của chuỗi trùng khớp với biểu thức chính quy.
+
+<a name = "sort">
+
+# 7. sort
+`sort` là một câu lệnh dùng để sắp xếp theo thứ tự các dòng trong một file dữ liệu nào đó.
+Mặc định thì `sort` sẽ xem xét chữ cái cái(hoặc số) đầu tiên của dòng để đối chiếu. `sort` sẽ sắp xếp nó như sau:
+ * Dòng nào bắt đầu bằng số sẽ được xếp trước những dòng bắt đầu bằng chữ
+ * Nếu bắt đầu bằng chữ thì dòng nào có chữ cái đầu tiên xuất hiện trước trong bảng chữ cái trước thì đứng trước.
+ * Những dòng chữ cái đầu tiên là chữ thường sẽ xuất hiện trước các dòng chữ cái đầu tiên là chữ hoa nếu là cùng chữ cái.
+Cú pháp: `sort [option] [file]`
+### Một số option
+ * `-o` để ghi dữ liệu sắp xếp vào 1 file. `sort -o file_out_put file`
+ * `-r` Sắp xếp theo chiều ngược lại.
+ * `-c` để kiểm tra xem file đầu vào đã được sắp xếp chưa.
+ * `-k` để chỉ ra bạn muốn lấy trường nào làm căn cứ để  sắp xếp. Cú pháp `sort -k x.n file` trong đó `x` là trường thứ `x` còn `n` là chữ cái thứ `n` của trường `x`
+
+<a name = "uniq">
+
+# 8. Uniq
+`uniq` câu lệnh được sử dụng để báo cáo hoặc các dòng in ra trong 1 file.
+#### Cú pháp
+`uniq [option] [file input] [file output]`
+Nếu không có file input thì nó nhận kết quả nhập vaò từ bàn phím.
+Nếu không có file output thì kết quả sẽ được in ra màn hình.
+#### Một số option
+VD file1 của tôi có nội dung như sau
+```
+[root@localhost ~]# cat file1
+aaaaaaaaaaaaaa
+aaaaaaaaaaaaaa
+
+bbbbbbb
+aaaaaaaaaaaaaa
+aaaaaaaaaaaaaa
+bbbbbbb
+bbbbbbb
+```
+ * Nếu không có option thì những dòng giống nhau mà liền kề với nhau chỉ được in ra một lần.
+```
+ [root@localhost ~]# uniq file1
+aaaaaaaaaaaaaa
+
+bbbbbbb
+aaaaaaaaaaaaaa
+bbbbbbb
+```
+ * `-c` in ra giống với ko có option nhưng sẽ được tính số dòng giống nhau đó và in ra số đó phía trước
+```
+ [root@localhost ~]# uniq -c file1
+      2 aaaaaaaaaaaaaa
+      1 
+      1 bbbbbbb
+      2 aaaaaaaaaaaaaa
+      2 bbbbbbb
+```
+ * `-d` chỉ in ra những dòng trùng lặp
+```
+[root@localhost ~]# uniq -d file1
+aaaaaaaaaaaaaa
+aaaaaaaaaaaaaa
+bbbbbbb
+```
+ * `-u` chỉ in ra những dòng không trùng lặp
+```
+[root@localhost ~]# uniq -u file1
+
+bbbbbbb
+```
+
+<a name = "paste">
+
+# 9. Paste
+`paste` là lệnh được sử dụng để hiển thị các dùng tương ứng của các file trên cùng một dòng.
+Cú pháp 
+`paste [option] [file1] [file2]`
+Nếu một trong 2 file được thay bởi dấu `-` thì file đó sẽ được nhập vào từ bàn phím.
+VD
+Tôi có 2 file như sau
+```
+[root@localhost ~]# cat file2
+file2
+file02
+file002
+file000002
+[root@localhost ~]# cat file1
+file1
+file01
+file001
+```
+ * Không có option 
+```
+[root@localhost ~]# paste file1 file2
+file1	 file2
+file01	 file02
+file001	 file002
+	     file000002
+```
+ * `-d` Thay khoảng trắng giữa 2 file trương đương trên cùng một dòng bằng một ký tự liệt kê phía sau
+```
+[root@localhost ~]# paste -d : file1 file2
+file1:file2
+file01:file02
+file001:file002
+:file000002
+```
+ * `-s` sẽ paste vào sau một file thay vì dán song song trên mỗi dòng
+```
+[root@localhost ~]# paste -s file1 file2
+file1	file01	file001
+file2	file02	file002	file000002
+```
+
+<a name = "join">
+
+# 10. Join
+`join` là câu lệnh để join các dòng dữ liệu của 2 files có 1 trường dữ liệu chung.
+Cú pháp
+`join [option] [file1] [file2]`
+#### option
+ * `-o định_dạng` chỉ ra định dạng của kết quả trả về
+ * `-1 n` join vào trường `n` của file 1
+ * `-2 n` join vào trường `n` của file 2
+ * `-t ký_tự` sử dụng `ký_tự` làm phân cách cho trường đầu vào và đầu ra.
+
+<a name = "tr">
+
+# 11. Tr
+`tr` là một tiện ích để chuyển các các ký tự được chỉ ra thành ký tự khác hoặc xóa chúng.
+### Một số ví dụ hay dùng
+ * Chuyển chữ thường thành chữ hoa
+`cat tên_file | tr a-z A-Z `
+ * Thay thế kí tự này bằng ký tự khác
+`cat tên_file | tr 'ký_tự_cũ' 'ký_tự_mới'`
+ * Xóa các ký tự hoặc từ trong file
+` cat tên_file | tr -d 'cái cần xóa'`
+ * Xóa tất cả ký tự không thể in ra trong file
+`cat tên_file | tr -d '[:print:]'`
+
+<a name = "wc">
+
+# 12. Wc
+`wc`- word count: thường được sử dụng để tìm kiếm thông tin về số lượng dòng, số lượng từ, byte hoặc số lượng ký tự của một file hoặc một biến có nội dung.
+Cú pháp:
+`wc [option] tên_file`
+##### Option
+ * `-c` tính tổng byte
+ * `-m` tính tổng số ký tự
+ * `-w` tổng số từ
+ * `-l` tổng số dòng
+ * `-L` số byte của dòng text có dộ dài lớn nhất.
+Nếu không có option 
+```
+niemdt@niemdt:~$ wc test
+ 4  6 33 test
+```
+Khi đó trả về 3 trường trong đó `4` là số lượng dòng. `16` là số lượng từ. `33` là số byte.
+
+<a name = "tee">
+
+# 13. tee
+`tee` là câu lệnh cho phép lấy dữ liệu đầu ra của 1 lệnh nào đó và ghi thông tin đó vào 1 file
+
+VD
+`ls -l | tee test`
+Lệnh này sẽ ghi danh sách trả về màn hình cảu lệnh `ls -l` sẽ được ghi vào file `test`. 
+Với lệnh trên thì nó sẽ ghi đè lênh dữ liệu có sẵn trong file `test` nếu muốn nó ghi xuống dưới mà không ghi đè ta dùng thêm option `-a`
+`ls -l | tee -a test`
+
+<a name = "cut">
+
+# 14. Cut
+`cut` là một tiện ích giúp ta cut, trích xuất mội dung của tập tin theo cột. Nó cũng có thể chỉ ra dấu phân cách đặc biệt các cột (cột được coi như trường).
+Cú pháp:
+`cut [option] [tên file]`
+#### Option
+ * `-b n` trích xuất ra byte thứ `n` của mỗi dòng. Hoặc `-b n-m` trích xuất từ byte thứ `n` đến byte thứ `m` của mỗi dòng.
+ * `-c n` tích xuất ra ký tự thứ `n` của mỗi dòng. Hoặc `-c n-m` trích xuất từ ký tự thứ `n` đến ký tự thứ `m` của mỗi dòng.
+ * `-f n` tích xuất ra trường thứ `n` của mỗi dòng. Hoặc `-c n-m` trích xuất từ trường thứ `n` đến trường thứ `m` của mỗi dòng. Nếu muốn in cũng lúc 2 trường `n` và `m` ta dùng dấu `,` để phân các `-f n,m`
+Nếu in cùng lúc nhiều trường muốn thay dấu phân cách giữa các trường bằng một kí tự nào đó ta thêm option `--output-delimiter='ký_tự'`
