@@ -1,17 +1,31 @@
 # Mục lục
+
 [1. Echo](#echo)
+
 [2. Export](#export)
+
 [3. Cat](#cat)
+
 [4. Sed](#sed)
+
 [5. Grep](#grep)
+
 [6. Awk](#awk)
+
 [7. Sort](#sort)
+
 [8. Uniq](#uniq)
+
 [9. Paste](#paste)
+
 [10. Join](#join)
+
 [11. Tr](#tr)
+
 [12. Wc](#wc)
+
 [13. Tee](#tee)
+
 [14. Cut](#cut)
 
 <a name = "echo">
