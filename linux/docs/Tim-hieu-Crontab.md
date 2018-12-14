@@ -27,3 +27,8 @@ Thông thường các máy đã đều được cài sẵn `crontab` tuy nhiên 
 Sau đó khởi động nó và để nó tự động chạy mõi khi reboot bằng cách nhaaoj vào các lệnh sau:
  * `service crond start`
  * `chkconfig crond on`
+
+### Chỉ định user chạy một câu lệnh 
+Vào file `/etc/crontab` và thêm thông tin vào file này. Thông tin trong đây có dạng
+`# m h dom mon dow user      command`
+Nhưng thông thường sẽ không làm theo cách này vì ko may sẽ sửa nhầm gây ảnh hưởng tới toàn hệ thống. Ta có một các khác. Ta vào thư mục `/etc/cron.d` ta có thể thoải mái thêm các file trong này và các câu lệnh thời gian và user thực hiện cũng giống như trong file `/etc/crontab`

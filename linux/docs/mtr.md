@@ -42,4 +42,3 @@ Ngoài ra còn các option khác ta có thể tham khảo trong tùy chọn `-h`
 `mtr -h`
 
 ![](https://github.com/niemdinhtrong/NIEMDT/blob/master/linux/images/mtr6.png)
-
