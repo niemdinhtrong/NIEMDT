@@ -32,11 +32,11 @@ Dùng lệnh `vi /etc/exports` để mở file. Mỗi lần sửa file này xong
 
 Có lưu ý rằng khi khai báo quyền truy cập của client ta cần viết liền.Ví dụ trên nếu khai báo `192.168.169.129(rw)` sẽ khác với khai báo `192.168.169.129 (rw)` với cách thứ nhất thì option sẽ áp dụng với địa chỉ khai báo ở trước đó. Còn với cách thứ 2 thì các quyền của địa chỉ khai báo trước sẽ được chỉ định là mặc định(chỉ có quyền đọc) còn option sẽ áp dụng với những địa chỉ không được khai báo.
 
-Để dịch vụ NFS có thể gửi và nhận yêu cầu từ phía Client và Server ta cần khởi động dịch vụ `portmap` và ta cũng cần khởi động cả dịch vụ `nfs`. Ta sử dụng 2 câu lệnh
-`service portmap start`
+Để dịch vụ NFS có thể gửi và nhận yêu cầu từ phía Client và Server ta cần khởi động dịch vụ `NFS`. Ta sử dụng câu lệnh
 `service nfs start`
-Mỗi khi reboot máy ta cần chạy lại 2 lệnh này.
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/linux/images/nfs4.png)
+Mỗi khi reboot máy ta cần chạy lại lệnh này.
+
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/linux/images/nfs0.png)
 
 Ta cũng cần kiểm tra trạng thái firewall và tắt nó đi để cho máy client có thể truy cập vào. Ta dùng lệnh:
 `systemctl status firewalld` để kiểm tra trạng thái
