@@ -43,7 +43,7 @@
 
 <a name="1">
 
-#1.Hiển thị các giao diện mạng#
+#### 1.Hiển thị các giao diện mạng
 Với option `-D` sẽ hiển thị ra danh sách các giao diện mạng có sẵn và ta có thể bắt các gói tin trên các giao diện này.
 ```
 [root@localhost ~]# tcpdump -D
@@ -55,7 +55,7 @@ Với option `-D` sẽ hiển thị ra danh sách các giao diện mạng có s�
 6.any (Pseudo-device that captures on all interfaces)
 7.lo [Loopback]
 ```
-#2. Bắt gói tin từ một giao diện ethernet#
+#### 2. Bắt gói tin từ một giao diện ethernet
 
 <a name="2">
 
@@ -76,7 +76,7 @@ Option này tcpdump bắt tất cả các gói tin đi qua `ens33`. Nó sẽ b�
 
 <a name="3">
 
-#3. Chỉ bắt đúng N gói tin#
+#### 3. Chỉ bắt đúng N gói tin
 Như ví dụ trên ta thấy nó sẽ bắt tất cả các gói tin. Đẻ bắt đúng `N` gói tin ta dùng option `-c` 
 VD chỉ bắt đúng `5` gói tin
 ```
@@ -95,7 +95,7 @@ listening on ens33, link-type EN10MB (Ethernet), capture size 262144 bytes
 
 <a name="4">
 
-#4. Hiển thị các gói tin bắt được trong hệ ASCII`
+#### 4. Hiển thị các gói tin bắt được trong hệ ASCII
 Để hiển thị thông tin trong hệ ASCII ta dùng option `-A`
 ```
 [root@localhost ~]# tcpdump  -A -i ens33 
@@ -119,7 +119,7 @@ E..Je8@.@............Z.5.6..Q............129.169.168.192.in-addr.arpa.....
 
 <a name="5">
 
-#5. Hiển thị các gói tin bắt được dưới dạng HEX và ASCII#
+#### 5. Hiển thị các gói tin bắt được dưới dạng HEX và ASCII
 Một số người dùng có thể muốn phân tích gói tin dưới dạng cơ số 16. Tcpdump cung cấp option `-XX` cho phép hiển thị gói tin bắt được dưới cả 2 dạng HEX và ASCII
 ```
 [root@localhost ~]# tcpdump  -XX -i ens33 
@@ -142,7 +142,7 @@ listening on ens33, link-type EN10MB (Ethernet), capture size 262144 bytes
 
 <a name="6">
 
-#6. Bắt gói tin và ghi vào một file#
+#### 6. Bắt gói tin và ghi vào một file
 tcpdump cho phép ta ghi kết quả bắt được vào một file và khi cần ta có thể sử dụng nó cho các mục đích phân tích khác. Các file này thường có đuôi `.pcap` và ta có thể dùng wireshark để đọc nó
 Để ghi vào file ta dùng option `-w`
 ```
@@ -168,7 +168,7 @@ reading from file tcpdump1.pcap, link-type EN10MB (Ethernet)
 
 <a name="7">
 
-#7. Bắt các gói tin với địa chỉ IP#
+#### 7. Bắt các gói tin với địa chỉ IP
 Trong các ví dụ trên các gói tin hiển thị gói tin với địa chỉ hostname chứ không phải là địa chỉ IP. Để bắt các gói tin và hiển thị phần địa chỉ là địa chỉ IP ta dùng option `-n`
 ```
 [root@localhost ~]# tcpdump  -i ens33 -n
@@ -181,7 +181,7 @@ listening on ens33, link-type EN10MB (Ethernet), capture size 262144 bytes
 
 <a name="8">
 
-#8. Bắt gói tin với dấu thời gian#
+#### 8. Bắt gói tin với dấu thời gian
 Option `-tttt` hiển thị các gói tin có thêm trường ngày
 ```
 [root@localhost ~]# tcpdump  -i ens33 -tttt
@@ -194,7 +194,7 @@ listening on ens33, link-type EN10MB (Ethernet), capture size 262144 bytes
 
 <a name="9">
 
-#9. Đọc các gói tin lớn hơn N bytes#
+#### 9. Đọc các gói tin lớn hơn N bytes
 Dùng lệnh `tcpdump greater số_bytes`
 
 <a name="10">
@@ -204,7 +204,7 @@ Dùng lệnh `tcpdump less số_byte`
 
 <a name="11">
 
-#11. Chỉ nhận gói tin với một kiểu giao thức cụ thể#
+#### 11. Chỉ nhận gói tin với một kiểu giao thức cụ thể
 Ta có thể lọc các gói tin dựa vào kiểu giao thức: TCP, UDP, ARP, ...
 VD bắt gói tin TCP qua interface `ens33`
 ```
@@ -219,7 +219,7 @@ listening on ens33, link-type EN10MB (Ethernet), capture size 262144 bytes
 
 <a name="12">
 
-#12. Bắt các gói tin qua một port cụ thể#
+#### 12. Bắt các gói tin qua một port cụ thể
 ```
 [root@localhost ~]# tcpdump -i ens33 port 22
 tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
@@ -231,13 +231,13 @@ listening on ens33, link-type EN10MB (Ethernet), capture size 262144 bytes
 
 <a name="13">
 
-#13. Bắt các gói tin trên địa chỉ nguồn hoặc đích#
+#### 13. Bắt các gói tin trên địa chỉ nguồn hoặc đích
 * Bắt theo địa chỉ nguồn: `tcpdump src IP`
 * Bắt theo địa chỉ đích: `tcpdump dst IP`
 
 <a name="14">
 
-#14. Bộ lọc các gói#
+#### 14. Bộ lọc các gói
 Ví dụ ta muốn bắt tất cả các gói tin ngoại trừ các gói `arp` và `rarp` ta có thể sử dụng điều kiện `and`, `or` hoặc `not` để lọc các gói tin:
 VD
 `tcpdump -i ens33 not arp and not rarp`
