@@ -1,100 +1,109 @@
-## Tìm hiểu một số mô hình mạng trong KVM
-Cũng giống như các công cụ ảo hóa khác KVM cũng cung cấp các mô hình mạng trong việc ảo hóa network. Các mô hình bao gồm:
- * NAT
- * Bridge
- * Host-only
-### 1. NAT
+## Tìm hiểu về công nghệ Linux-bridge
+`Linux bridge` là một công nghệ cung cấp switch ảo để giải quyết vấn đề ảo hóa Network bên trong các máy vật lý.
 
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/networknat.png)
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/2.png)
 
-Với mô hình này KVM thực hiện ánh xạ một dải địa chỉ để cung cấp cho máy ảo. Dải địa chỉ ta có thể chọn tùy ý. Với mô hình này máy ảo của ta có thể giao tiếp với internet.
-#### Cách cấu hình.
-Bình thường khi cài KVM nó sẽ cung cấp cho ta một mạng ảo NAT mang tên `default` mạng này thường mang dải địa chỉ IP 192.168.122.x. Ta có thể add thêm một mạng ảo cũng với mô hình NAT khác. Có nhiều cách để thực hiện việc này nhưng ở đây tôi dùng công cụ `virt-manager`
-Mở công cụ `virt-manager` bằng câu lệnh `virt-manager`
+Chúng ta có thể thấy rằng có một con switch được tạo ra nằm bên trong của máy vật lý. Các VM kết nối đến đây để có thể liên lạc được với nhau. Nếu muốn liên lạc ra bên ngoài ta có thể kết nối con switch này với card mạng trên máy vật lý của ta (giống như ta dùng dây kết nối switch với router). Ta có thể switch với 1 hoặc nhiều port.
+*Chú ý* ta không thể kết nối switch ảo với card `wireless` do HĐH không hỗ trợ.
+#### Cấu trúc của linux bridge
 
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/net1.png)
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/1.png)
 
-Chọn `Edit` chọn `Connection Details`. Ta có thể thấy các mạng có ở cột bên trái. Để tạo một mạng khác ta làm như sau:
+Trong đó:
+* **Bridge** ở đây là switch ảo 
+* **Tap** hay tap interface là giao diện mạng để các VM kết nối với switch do Linux bridge tạo ra(nó hoạt động ở lớp 2 của mô hình OSI)
+* **fd**: Forward data có nhiệm vụ chuyển dữ kiệu từ VM tới switch.
+Switch ảo do Linux bridge tạo ra có chức năng tương tự với 1 con switch vật lý.
 
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/net%202.png)
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/3.png)
 
-Sau đó nhập tên cho mạng và nhấn `Forward`
+Ta có thể thấy rõ hơn cách kết nối của VM ra ngoài internet. Khi máy vật lý của ta có card mạng kết nối với internet(không phải card wireless). Trên switch ảo của ta sẽ phải có đường để kết nối ra ngoài internet(cụ thể là kết nối với card mạng của máy vật lý). Ta có thể hình dung card mạng trên máy vật lý sẽ được gắn trực tiếp vào switch ảo nên ta có thể thấy sau khi add switch ảo và card vật lý có cùng địa chỉ MAC. Và trên card vật lý sẽ không còn địa chỉ IP mà nó được gắn cho switch ảo.
 
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/net3.png)
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/4.png)
 
-Ta chọn địa chỉ mạng cho mạng định tạo (chọn địa chỉ mạng tùy ý). Sau đó chọn dải IP cấp phát cho máy ảo trong dải mạng. Ta cũng có có thể để đặt IP tĩnh trên máy ảo nếu tích vào `Enable Static Route Definition`. Chọn xong ta nhấn `Forward`
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/5.png)
 
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/net4a.png)
+Và bây giờ trên các VM muốn giao tiếp với nhau hoặc ra ngoài internet ta chỉ cần kết nối VM đó với switch ảo. Lúc này card mạng trên VM sẽ được gắn với 1 cổng của switch ảo thông qua  tap interface và cổng này có tên là `vnet`. Ở đây có tên là `vnet0`
+Khi ta kết nối vào switch ảo các VM sẽ nhận địa chỉ IP cùng với dải địa chỉ IP của card mà ta add và switch và các địa chỉ IP này sẽ được cấp bởi dịch vụ DHCP trên router.
 
-Bước này ta có thể chọn có sử dụng IPv6 hay không. Ở đây tôi không chọn.
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/6.png)
 
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/net5.png)
+#### Đường đi của gói tin ra ngoài 
+Để xem đường đi của gói tin trong VM ra bên ngoài tôi dùng lệnh `tcpdump` để bắt gói tin tại các điểm ta cho rằng gói tin đi qua. Ở đây tôi bắt gói tin trên card `eth0` của VM, trên switch ảo `virbr2`, trên tap interface `vnet0`.
+Trước tiên bạn nên chú ý đến các địa chỉ MAC sau:
 
-Ta chỉ ra mô hình mạng. Ở đây để là `NAT` sau đó chọn `Finish` để  kết thúc.
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/8.png)
 
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/net6.png)
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/9.png)
 
-Sau khi tạo ta có thể thấy
+Sau khi bắt gói tin ghi vào file tôi dùng công cụ `wireshark` để phân tích gói tin để thấy được địa chỉ MAC mà gói tin đi qua.
+ * Trên card `eth0` của VM
 
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/net7.png)
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/rth0.1.png)
 
-Bây giờ muốn sử dụng mạng vừa tạo ta vào máy ảo muốn đặt
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/eth0.2.png)
 
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/net8.png)
+ * Trên `vnet0`
 
-Ta vào `Network source` chọn đúng tên mạng chúng ta vừa tạo. Sau đó chọn `Apply`
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/vnet0.1.png)
 
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/net9.png)
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/vnet0.2.png)
 
-Ta reboot lại máy ảo và kiểm tra lại xem máy đã nhận đúng dải IP chưa
+ * Trên linux bridge `virbr2`
 
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/net10.png)
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/virbr2.1.png)
 
-### 2. Host-only
-Với mô hình mạng kiểu này cũng cho phép ta cấp phát địa chỉ tùy ý giống với mô hình NAT. Nhưng ở đây máy ảo không thể nói chuyện với máy tính bên ngoài. Nó chỉ có thể trao đổi với các máy trong cùng mạng bên trong server vật lý và trao đổi với đươc máy chủ vật lý.
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/virbr2.2.png)
 
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/networkisolated.png)
+Như chúng ta thấy bên trên gói tin chỉ đi qua 2 địa chỉ MAC là `52:54:00:40:07:7d`-card `eth0` của VM và `52:54:00:6b:1a:f7`- card trên máy vật lý được gán với switch ảo. Như vậy ta có thể thấy đường đi của gói tin bên trong server vật lý là trong suốt. Từ VM đi thẳng đến card vật lý gắn với switch ảo và đi ra ngoài mạng.
+#### Tạo và quản lý linux bridge
+Để tạo một linux bridge(switch ảo) ta dùng lệnh 
+`brctl addbr tên_switch`
 
-#### Cấu hình
-Ta cũng làm tương tự như cấu hình với NAT. Nhưng ở bước 4 ta chọn mục `Isolated virtual network` 
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/10.png)
 
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/net11.png)
+Tiếp theo là bước add card mạng cho switch dùng lệnh 
+`brctl addif tên_switch tên_card`
+ * Tên swich ở đây là switch ta vừa mới tạo ở câu lệnh bên trên
+ * Tên card ở đây là card mạng trên máy vật lý của ta (trừ card wireless).
 
-Và ta có thể thấy
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/13.png)
 
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/net12.png)
-
-Bây giờ tiến hành thao tác trên máy ảo. Ta chọng đúng tên mạng ta vừa tạo
-
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/net13.png)
-
-Tiến hành reboot máy ảo và kiểm tra IP
-
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/net14a.png)
-### 3. Bridge
-Ở mô hình ta tìm hiểu về công nghệ `linux bridge`. Linux bridge là một phần mềm được tích hợp trong nhân linux để giải quyết vấn đề ảo hóa phần Network trong trong các máy vật lý. Về mặt logic Linux bridge tạo ra một con switch ảo để các VM kết nối vào và có thể nói chuyện được với nhau cũng như sử dụng để ra ngoài mạng.
-
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/networkbridge.png)
-
-Với mô hình mạng này ta có thể dùng dải mạng tương ứng với mỗi card mạng của ta. Ta cũng có thể add thêm 1 còn switch ảo và gán cho nó các card mạng tương ứng. Lúc này khi các VM kết nối vào switch đó nó sẽ nhận địa chỉ của card đã kết nối với switch.
-##### Lệnh tạo một bridge
-* Tạo bridge
-`brctl addbr tên_bridge`
-* Gán port cho bridge
-`brctl addif tên_bridge tên_card`
-* Kiểm tra lại hoạt động của bridge
+Để kiểm tra những swtich ảo trên máy và những card đã được add vào switch ảo đó ta dùng lệnh 
 `brctl show`
-* Ngắt card khỏi bridge
-`brctl delif tên_bridge tên_card`
-*Lưu ý* Với các card mạng có sẵn trên máy hoặc các card được sinh ra trong quá trình cài các phần mềm ảo hóa thì mặc định nó đã được gắn với một switch ảo có cùng tên nên vì vậy muốn kết nối bridge đến các switch đó ta chỉ cần kết nối các máy VM đến nó là được.
-Thực hiện trên VM ta thực hiện giống với các mô hình trên
 
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/net15.png)
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/14.png)
 
-Ta reboot lại VM và kiểm tra lại địa chỉ
+Tiếp sau đó ta tiến hành xin cấp IP cho NIC. Ta dùng các câu lệnh sau
+`ifconfig tên_card 0`
 
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/net16.png)
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/22.png)
 
-Ta có thể thấy card đó trên máy tôi
+Câu lệnh xóa IP của card ens9
 
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/net17.png)
+`dhclient tên_bridge`
+
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/16.png)
+
+Câu lệnh này để xin cấp IP chi bridge
+
+Và bây giờ ta có thể thấy
+ * khi chưa dùng 2 câu lệnh trên
+
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/17.png)
+
+ * Sau khi dùng 2 lệnh trên
+
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/18.png)
+
+Bây giờ trên VM ta có thể kết nối với switch ảo đó.
+
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/20.png)
+
+Ta có thể thấy Vm đã nhận IP
+
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/19.png)
+
+Mô hình vùa tạo như sau
+
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/21.png)
