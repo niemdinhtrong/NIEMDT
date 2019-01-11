@@ -29,7 +29,7 @@ Như ta thấy ở đây `ring 0` có đặc quyền cao nhất. Nó có có th�
 
 ![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/hyper4.png)
 
-Với cách này thì guest OS không chạy trên ring 1 còn ring 0 để chạy hypervisor. Các guest OS hoàn toàn không nhận ra hòan toàn không nhận ra nó đang nằm trên một lớp ảo hóa. Khi một phần mềm chạy trên guest OS các đoạn code của nó không bị biến đổi mà chạy trực tiếp trên host OS và phần mềm đó như đang chạy trên một hệ thống thực sự. Hypervisor phải cung cấp cho máy ảo một thư viện của toàn hệ thống, bao gồm BIOS ảo, không gian bộ nhớ ảo và các thiết bị ảo.
+Với cách này thì guest OS chạy trên ring 1 còn ring 0 để chạy hypervisor. Các guest OS hoàn toàn không nhận ra hòan toàn không nhận ra nó đang nằm trên một lớp ảo hóa. Khi một phần mềm chạy trên guest OS các đoạn code của nó không bị biến đổi mà chạy trực tiếp trên host OS và phần mềm đó như đang chạy trên một hệ thống thực sự. Hypervisor phải cung cấp cho máy ảo một thư viện của toàn hệ thống, bao gồm BIOS ảo, không gian bộ nhớ ảo và các thiết bị ảo.
 ##### 1.2 Paravirtualization
 Là một phương pháp ảo hóa mà HĐH cần phải thay đổi để có thể giao tiếp giữa hypervisor và guest OS thông qua (hypercalls).
 
