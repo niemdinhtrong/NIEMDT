@@ -106,4 +106,4 @@ Ta có thể thấy Vm đã nhận IP
 
 Mô hình vùa tạo như sau
 
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/21.png)
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/linux-bridge1.jpeg)
