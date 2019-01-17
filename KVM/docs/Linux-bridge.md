@@ -1,11 +1,14 @@
-## Tìm hiểu về công nghệ Linux-bridge
+# Tìm hiểu về công nghệ Linux-bridge
+
 `Linux bridge` là một công nghệ cung cấp switch ảo để giải quyết vấn đề ảo hóa Network bên trong các máy vật lý.
 
 ![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/2.png)
 
-Chúng ta có thể thấy rằng có một con switch được tạo ra nằm bên trong của máy vật lý. Các VM kết nối đến đây để có thể liên lạc được với nhau. Nếu muốn liên lạc ra bên ngoài ta có thể kết nối con switch này với card mạng trên máy vật lý của ta (giống như ta dùng dây kết nối switch với router). Ta có thể switch với 1 hoặc nhiều port.
+Chúng ta có thể thấy rằng có một con switch được tạo ra nằm bên trong của máy vật lý. Các VM kết nối đến đây để có thể liên lạc được với nhau. Nếu muốn liên lạc ra bên ngoài ta có thể kết nối con switch này với card mạng trên máy vật lý của ta (giống như ta dùng dây kết nối switch với router). Ta có thể kết nối switch với 1 hoặc nhiều port.
 *Chú ý* ta không thể kết nối switch ảo với card `wireless` do HĐH không hỗ trợ.
-#### Cấu trúc của linux bridge
+
+## Cấu trúc của linux bridge
+
 
 ![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/1.png)
 
@@ -28,8 +31,12 @@ Khi ta kết nối vào switch ảo các VM sẽ nhận địa chỉ IP cùng v�
 
 ![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/6.png)
 
-#### Đường đi của gói tin ra ngoài 
+## Đường đi của gói tin ra ngoài 
+
 Để xem đường đi của gói tin trong VM ra bên ngoài tôi dùng lệnh `tcpdump` để bắt gói tin tại các điểm ta cho rằng gói tin đi qua. Ở đây tôi bắt gói tin trên card `eth0` của VM, trên switch ảo `virbr2`, trên tap interface `vnet0`.
+
+![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/25.png)
+
 Trước tiên bạn nên chú ý đến các địa chỉ MAC sau:
 
 ![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/8.png)
@@ -56,7 +63,9 @@ Sau khi bắt gói tin ghi vào file tôi dùng công cụ `wireshark` để ph�
 ![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/virbr2.2.png)
 
 Như chúng ta thấy bên trên gói tin chỉ đi qua 2 địa chỉ MAC là `52:54:00:40:07:7d`-card `eth0` của VM và `52:54:00:6b:1a:f7`- card trên máy vật lý được gán với switch ảo. Như vậy ta có thể thấy đường đi của gói tin bên trong server vật lý là trong suốt. Từ VM đi thẳng đến card vật lý gắn với switch ảo và đi ra ngoài mạng.
-#### Tạo và quản lý linux bridge
+
+## Tạo và quản lý linux bridge
+
 Để tạo một linux bridge(switch ảo) ta dùng lệnh 
 `brctl addbr tên_switch`
 
@@ -87,8 +96,19 @@ Câu lệnh xóa IP của card ens9
 
 Câu lệnh này để xin cấp IP chi bridge
 
+*Lưu ý* hai câu lệnh trên chỉ có hiệu lực đến khi ta reboot lại máy vật lý. Để VM có thể nhận được địa chỉ IP ngay cả khi servẻ vật lý bị reboot ta thực hiện ghi các dòng như sau vào file `/ect/network/interfaces`
+```
+auto testbr
+iface testbr inet dhcp
+bridge_ports ens9
+bridge_stp off # kich hoat che do STP trong bridge
+bridge_fd 0 
+bridge_maxwait 0
+```
+Sau đó tiến hành chạy lênh `ifdown -a && ifup -a` để khởi động lại internet.
+
 Và bây giờ ta có thể thấy
- * khi chưa dùng 2 câu lệnh trên
+ * Khi chưa dùng 2 câu lệnh trên
 
 ![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/17.png)
 
@@ -100,7 +120,7 @@ Bây giờ trên VM ta có thể kết nối với switch ảo đó.
 
 ![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/20.png)
 
-Ta có thể thấy Vm đã nhận IP
+Ta có thể thấy VM đã nhận IP
 
 ![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/19.png)
 

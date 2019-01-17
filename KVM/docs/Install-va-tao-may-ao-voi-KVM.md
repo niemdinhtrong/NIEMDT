@@ -40,7 +40,7 @@ Chọn `Forward` để chuyển qua bước tiếp theo
 
 ![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/kvm8.png)
 
-Bước này ta chọn dung lượng RAM (tính bằng Mb) và số CPU của máy ảo. Sau khi chọn xong ta nhấn `Forward` để tiếp tục
+Bước này ta chọn dung lượng RAM (tính bằng M) và số CPU của máy ảo. Sau khi chọn xong ta nhấn `Forward` để tiếp tục
 
 ![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/kvm9.png)
 
@@ -72,12 +72,3 @@ Ta có thể trở lại `virt-manager` để quản lý các máy ảo đã t�
 
 ![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/kvm21.png)
 
-### Quản lý máy ảo trên server khác
-Với `virt-manager` ta cũng có thể quản lý các máy ảo ở trên một server khác như các máy ảo đang trên máy của mình
-Để tạo kết nối này ta vào `File` chọn `Add connection` 
-
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/kvm22a.png)
-
-![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/kvm22.png)
-
-Ở đây ta có thể chọn loại `Hypervisor` và loại kết nối (thường sử dụng `SSH`). Ở mục `Hostname` ta có thể điền vào là domain name của server hoặc là địa chỉ IP của server. CÓ thể chọn `Autoconnect` nếu muốn tự động kết nối với server mỗi lần khởi động `virt-manager`
