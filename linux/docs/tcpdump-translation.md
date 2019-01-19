@@ -1,3 +1,5 @@
+# Tìm hiểu cơ bản về tcpdump
+
 Khi nhắc đến `tcpdump` thì hầu hết người quản trị như chúng ta biết đến nó theo hai kiểu. Hoặc là nắm rất rõ về nó hoặc là chỉ biết cơ bản về nó và mỗi khi sử dụng thì cần tra lại tài liệu. `Tcpdump` trở nên thông dụng là bởi vì nó là một lệnh khá tiên tiến và dễ sử dụng để đi sâu phân tích sự hoạt động của mạng khi sử dụng nó.
 
 Bài viết này tôi sẽ trình bày những điều cơ bản cũng như một số các sử dụng nâng cao hơn khi sử dụng `tcpdump`. Trong bài viết này chắc chắn còn có nhiều thiếu sót, mong các bạn phản hồi để tôi có thể bổ sung kịp thời. 
