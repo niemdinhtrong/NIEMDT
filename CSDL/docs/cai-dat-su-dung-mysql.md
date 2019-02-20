@@ -277,3 +277,33 @@ Ta có thể sử dụng
 select * from tên-bảng
 where diemthi BETWEEN 8 and 10;
 ```
+
+**view**
+
+View cho phép ta xem các thông tin cần thiết từ các bảng
+
+Tạo `VIEW`
+
+```
+CREATE view tên-view
+AS
+SELECT các trường
+FROM các bảng
+WHERE điều kiện;
+```
+
+**Tạo biến**
+
+Sử dụng `Declare tên-biến kiểu-ký-tự` để khai báo một biến.
+
+**Backup, restore database**
+
+Để Backup dữ liệu ta lưu nó thành một file và khi cần ta có thể khôi phục lại file đó để thanh dữ liệu trong MySQL
+
+Chuyển database thành một file
+
+`mysqldump -u root -p tên-data > tên-file.sql`
+
+Chuyển dữ liệu từ file vào mysql
+
+`mysql -u root -p tên-data < tên-file`
