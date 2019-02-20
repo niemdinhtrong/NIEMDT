@@ -135,6 +135,8 @@ Thoát khỏi mysql
 ```
 cd /var/www/html/
 
+mv wordpress/* /var/www/html/
+
 mv wp-config-sample.php wp-config.php
 
 vi wp-config.php
