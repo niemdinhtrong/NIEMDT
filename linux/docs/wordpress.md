@@ -1,5 +1,7 @@
 # Cài đặt wordpress trên CentOS 7
 
+Bài viết này hướng dẫn cài wordpress trên 2 note. Nếu bạn muốn cài trên 1 note bạn có thể tham khảo <a href ="https://github.com/niemdinhtrong/NIEMDT/blob/master/linux/docs/LAMP.md"  target="_blank">tại đây</a>
+
 ## Chuẩn bị
 
 Chuẩn bị 2 máy chạy HĐH CentOS7. 

@@ -1,3 +1,7 @@
+# Cài đặt wordpress
+
+Hướng dẫn cài đặt wordpress trên 1 note.
+
 ## LAMP là gì?
 
 Lamp thường được dùng để phát triển web server. LAMP là từ viết tắt của Linux, Apache, Mysql, PHP. 
