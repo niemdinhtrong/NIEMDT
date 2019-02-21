@@ -1,8 +1,34 @@
-# Cài đặt wordpress đặt BD trên máy khác
+# Cài đặt wordpress trên CentOS 7
 
 ## Chuẩn bị
 
-Chuẩn bị 2 máy chạy HĐH CentOS7. Một máy đóng vai trò Web Server và một máy đóng vai trò là maý MySQL server.
+Chuẩn bị 2 máy chạy HĐH CentOS7. 
+
+Trong đó một máy sẽ đóng vai trò MySQL Server và một máy sẽ là Web Server.
+
+Cấu hình máy Web Server 
+
+ * 1 CPU
+ * 512M RAM
+ * 2 interface
+
+ Cấu hình máy MySQL
+
+ * 1 CPU
+ * 512M RAM
+ * 1 interface
+
+Vì đây là môi trường lab nên tôi tiến hành stop firewalld trên cả 2 máy và SElinux trên Web Server.
+
+Sử dụng lệnh
+
+```
+setenforce 0
+
+systemctl stop firewalld
+```
+
+Nếu không muốn bạn có thể thực hiện mở port 80 trên Web Server và mở kết nối tới DB còn trên máy MySQL cần mở port 3306.
 
 ## Mô hình như sau
 
@@ -16,7 +42,7 @@ Trong đó
 
 ### Trên máy MySQL
 
-**Cài đặt MySQL server**
+**Bước 1: Cài đặt MySQL server**
 
 Chạy lần lượt các lệnh sau:
 
@@ -44,7 +70,7 @@ mysql_secure_installation
 
 Để kiểm tra ta truy cập thử MySQL với tài khoản `root`.
 
-**Tạo Database cho wordpress**
+**Bước 2: Tạo Database cho wordpress**
 
 Đăng nhập vào MySQL với user `root`
 
@@ -62,7 +88,6 @@ create user 'user'@'IP' identified by 'pass';
 grant all privileges on tên-database to 'user'@'IP';
 
 flush privileges;
-
 ```
 
 Trong đó
@@ -71,15 +96,21 @@ Trong đó
  * `user` là tên user sử dụng để wordpress kết nối vào MySQL
  * `IP` là địa chỉ của máy Web Server để truy cập MySQL
 
-Mở port để có thể login remote
+VD:
 
 ```
-iptables -I INPUT -p tcp -m tcp --dport 3306 -j ACCEPT
+create database wordpress;
+
+create user 'niemdt'@'192.168.50.56' identified by '123456';
+
+grant all privileges on tên-database to 'niemdt'@'123456';
+
+flush privileges;
 ```
 
 ### Trên máy Web server
 
-**Apache**
+**Bước 1: Cài Apache**
 
 Chạy lệnh sau để cài đặt
 
@@ -93,12 +124,6 @@ systemctl start httpd
 systemctl enable httpd
 ```
 
-Tắt firewall
-
-```
-systemctl stop firewalld
-```
-
 Để kiểm tra ta mở trình duyệt và truy cập vào địa chỉ IP của web server
 
 `http://địa-chỉ-IP`
@@ -107,7 +132,7 @@ Kết quả trả về như sau
 
 ![](/linux/images/wordpress/2.png)
 
-**Cài PHP**
+**Bước 2: Cài PHP**
 
 Sử dụng `yum` để cài PHP
 
@@ -135,7 +160,7 @@ Kết quả trả về như sau là thành công
 
 ![](/linux/images/wordpress/3.png)
 
-**Cài wordpress**
+**Bước 3: Cài wordpress**
 
 Truy cập vào thư mục `html`
 
@@ -174,22 +199,37 @@ vi wp-config.php
 Sau đó tìm các dòng sau để sửa thông tin
 
 ```
-define('DB_NAME', 'datawordpress');     # tên database tạo ở trên
+define('DB_NAME', 'database_name_here');    
 
-define('DB_USER', 'niemdt');     # tên user vừa tạo
+define('DB_USER', 'username_here');    
 
-define('DB_PASSWORD', 'password');      # password của user bên trên
+define('DB_PASSWORD', 'password_here');      
 
-define('DB_HOST', '192.168.50.219');    # IP của máy MySQL
+define('DB_HOST', 'localhost');   
+```
+
+Trong đó:
+
+ * `database_name_here` : tên của database
+ * `username_here`      : tên user login vào mysql
+ * `username_here`      : password của user login vào mysql
+ * `localhost`          : địa chỉ cuả máy MySQL Sever
+
+VD:
+
+```
+define('DB_NAME', 'wordpress');    
+
+define('DB_USER', 'niemdt');    
+
+define('DB_PASSWORD', '123456');      
+
+define('DB_HOST', '192.168.50.219');   
 ```
 
 Sau đó lưu các thay đổi
 
 Mở kết nối sang MySQL server
-
-```
-setsebool httpd_can_network_connect_db on 
-```
 
 Bây giờ mở trình duyệt và truy cập địa chỉ của bạn để tiến hành cấu hình wordpress.
 
