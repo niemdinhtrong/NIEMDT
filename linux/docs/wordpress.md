@@ -130,9 +130,10 @@ systemctl enable httpd
 
 `http://địa-chỉ-IP`
 
+
 Kết quả trả về như sau
 
-![](/linux/images/wordpress/2.png)
+![](/linux/images/wordpress/2.1.png)
 
 **Bước 2: Cài PHP**
 
@@ -160,7 +161,7 @@ Mở trình duyệt web truy cập địa chỉ `http://địa chỉ Ip/info.php
 
 Kết quả trả về như sau là thành công
 
-![](/linux/images/wordpress/3.png)
+![](/linux/images/wordpress/3.1.png)
 
 **Bước 3: Cài wordpress**
 
