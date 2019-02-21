@@ -71,6 +71,11 @@ Trong đó
  * `user` là tên user sử dụng để wordpress kết nối vào MySQL
  * `IP` là địa chỉ của máy Web Server để truy cập MySQL
 
+Mở port để có thể login remote
+
+```
+iptables -I INPUT -p tcp -m tcp --dport 3306 -j ACCEPT
+```
 
 ### Trên máy Web server
 
@@ -179,6 +184,12 @@ define('DB_HOST', '192.168.50.219');    # IP của máy MySQL
 ```
 
 Sau đó lưu các thay đổi
+
+Mở kết nối sang MySQL server
+
+```
+setsebool httpd_can_network_connect_db on 
+```
 
 Bây giờ mở trình duyệt và truy cập địa chỉ của bạn để tiến hành cấu hình wordpress.
 
