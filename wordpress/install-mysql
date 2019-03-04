@@ -1,0 +1,63 @@
+#!/bin/sh
+
+# Cai mysql
+if ( yum list installed | grep -q mysql )
+    then
+        yum remove mysql
+        rm -rf /var/lib/mysql/*
+    else
+        echo =======================================================================
+    fi
+
+if ( yum list installed | grep -q wget )
+    then
+        echo =======================================================================
+    else
+        yum install wget
+    fi
+cd
+
+wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+
+rpm -ivh mysql-community-release-el7-5.noarch.rpm
+
+yum install mysql-server
+
+systemctl start mysqld
+
+echo "Thiet lap tao khoan root cho MySQL!"
+
+mysql_secure_installation
+
+# Tao DB cho wordpress
+
+echo Password cua user root:
+read u1
+echo [mysql] > /root/.my.cnf
+echo user=root >> /root/.my.cnf
+echo password=$u1 >> /root/.my.cnf
+chmod +x /root/.my.cnf
+
+echo "Ten database cho wordpress (Enter se mac dinh la wordpress):"
+read p1
+p1=${p1:-wordpress}
+echo "Ten user su dung cho wordperss login mysql(Enter se mac dinh la niemdt):"
+read p2
+p2=${p2:-niemdt}
+echo "Password cho user (Enter se mac dinh la 123456):"
+read p3
+p3=${p3:-123456}
+
+p5=`cat /root/ip-web`
+
+mysql -e "create database $p1"
+
+mysql -e "create user '$p2'@'$p5' identified by '$p3'"
+
+mysql -e "grant all privileges on $p1.* to '$p2'@'$p5'"
+
+mysql -e "flush privileges"
+
+systemctl stop firewalld
+
+echo "Cai dat thanh cong MySQL!!!!!!!!!!!!!"
