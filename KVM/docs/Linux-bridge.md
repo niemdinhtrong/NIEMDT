@@ -9,7 +9,6 @@ Chúng ta có thể thấy rằng có một con switch được tạo ra nằm b
 
 ## Cấu trúc của linux bridge
 
-
 ![](https://github.com/niemdinhtrong/NIEMDT/blob/master/KVM/images/Linux-bridge/1.png)
 
 Trong đó:

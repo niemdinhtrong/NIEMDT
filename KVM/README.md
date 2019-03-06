@@ -10,3 +10,4 @@
 8. [Tìm hiểu file xml trong KVM](docs/File-xml.md)
 9. [Quản lý máy ảo mới công cụ virsh](docs/Tao-va-quan-ly-may-ao-voi-lenh-virsh.md)
 10. [Cơ chế snapshot trong KVM](docs/Snapshot.md)
+11. [Live migrate](docs/live-migrate.md)
