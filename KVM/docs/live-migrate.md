@@ -4,7 +4,7 @@ Hai máy cài đặt KVM.
 
 Một máy đóng vai trò là NFS server.
 
-![](/KVM/images/magrate1.png)
+![](/KVM/images/migrate1.png)
 
 ## Chuẩn bị môi trường
 
