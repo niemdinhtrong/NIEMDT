@@ -1,6 +1,8 @@
 KVM (Kernel-based Virtual Machine) là giải pháp ảo hóa trên Linux.
 
-Là loại ảo hóa full virtualization
+Là loại ảo hóa full virtualization. 
+
+Tìm hiểu về KVM:
 
 * Công cụ Virt-manager
 
