@@ -17,9 +17,10 @@ Biến được gán trực tiếp. Giá trị của biến có thể là số h
 *Chú ý* giữa tên biến dâú bằng và giá trị không được có dấu cách. 
 Nếu `giá trị` là một chuỗi gồm nhiều từ thì cần đặt trong dấu `" "`
 Để gọi giá trị biến đã gán ta sử dụng ký tự `$` phía trước tên biến có thể sử dụng một trong 2 cách `$TÊN_BIẾN` hoặc `${TÊN_BIẾN}`
-###### Một số biến đặc biệt
+**Một số biến đặc biệt**
 Có một số biến mà ta không cần gán giá trị trực tiếp cho nó. Ta chỉ cần gọi nó ra còn giá trị của nó tùy thuộc vào lúc ta chạy chương trình
 VD `./tên_file chuỗi`
+
 Thì các biến đặc biệt đó là
  * `$#` sẽ trả về tổng số từ của chuỗi
  * `$0` trả về `tên_file`
@@ -28,7 +29,9 @@ Thì các biến đặc biệt đó là
  ................
  * `$9` trả về từ thứ 9 của chuỗi
  * `$@` trả về một chuỗi đầy đủ
+
 VD một file `test` có nội dung như sau
+
 ```
 #!/bin/sh
 echo "I was called with $# parameters"
@@ -37,7 +40,9 @@ echo "My first parameter is $1"
 echo "My second parameter is $2"
 echo "All parameters are $@"
 ```
+
 Khi chạy file này sẽ trả về kết quả như sau:
+
 ```
 [client2@localhost ~]$ ./test dinh trong niem
 I was called with 3 parameters
@@ -47,13 +52,15 @@ My second parameter is trong
 All parameters are dinh trong niem
 ```
 ### 2. Vòng lặp
-####### for
+**for**
+
 ```
 for biến in giá_trị
 do 
     lệnh
 done
 ```
+
 `giá_trị` có thể gồm nhiều giá trị ngăn cách nhau bởi dấu cách
 
 Hoặc
@@ -63,14 +70,18 @@ do
     lệnh (lệnh ở đây được thự hiện cho đến biểu thức expr2 là sai)
 done
 ```
-####### while
+
+**while**
+
 ```
 while [ điều kiện ]
 do
     lệnh
 done
 ```
-####### if
+
+**if**
+
 ```
 if [ điều kiện ]
 then
@@ -86,9 +97,11 @@ then
     lệnh nếu điều kiện đúng
 fi
 ```
+
 Với trường hợp này nếu điều kiện đúng thì thực hiện lệnh còn điều kiện sai thì thoát khỏi vòng lặp
 
 Hoặc ta có thể lồng nhiều điều kiện vào với nhau bằng cách
+
 ```
 if [ điều kiện ]
 then
@@ -100,7 +113,9 @@ else
     lệnh nếu ko thỏa nãn bất kỳ điều kiện nào
 fi
 ```
-####### case
+
+**case**
+
 ``` 
 case điều_kiện in
     TH1) 
@@ -117,12 +132,15 @@ case điều_kiện in
         ;;
 esac
 ```
+
 trong đó `*` ở trường hợp cuối cùng thể hiện những trường hợp không trùng với trường hợp nào được liệt kê ở trên.
 
 *Chú ý* ta có thể đặt các vòng lặp lồng vào nhau để giải quyết một bài toán cụ thể.
 
-### 3. Cấu trúc
+**3. Cấu trúc**
+
 Để tránh việc lặp đi lặp lại một đoạn code ta có thể đặt nó trong một cấu trúc và những lần sau muôn sử dụng lại ta chỉ cần gọi lại nó
+
 ```
 !#/bin/sh
 
@@ -136,12 +154,16 @@ tên()
 # muốn gọi lại cấu trúc bên trên
 tên $đối_số
 ```
-### 4. Phép kiểm tra so sánh
+
+**4. Phép kiểm tra so sánh**
+
 1. Toán tử kết hợp
+
 | !   | Phủ định (not)|
 | ---- | -------------- |
 | -a  | Và (and) |
 | -o  | Hoặc (or) |
+
 2. Lệnh kiểm tra file
 
 | Cú pháp  | Ý nghĩa |
@@ -155,6 +177,7 @@ tên $đối_số
 | -e file | kiểm tra file có tồn tại hay không |
 
 3 . So sánh
+
 So sánh số với số
 
 | Cú pháp | Ý nghĩa |
@@ -183,7 +206,7 @@ Phép tính
 | expr n1 + n2 | n1 + n2 |
 | expr n1 - n2 | n1 - n2 |
 | expr n1 / n2 | n1 / n2 |
-| expr n1 \* n2 | n1 nhân n2 |
+| expr n1 * n2 | n1 nhân n2 |
 
 *Lưu ý* trong phép kiểm tra nếu phép kiểm tra là đúng thì kết quả trả về là `0` còn sai thì kết quả trả về là khác `0`
  
