@@ -3,8 +3,8 @@
 
 #####################################################################
 echo "RAM"
-cat /proc/meminfo | grep MemFree
-
+ram=`cat /proc/meminfo | grep MemFree | awk '{print $2}'`
+echo "MemFree: $ram kB"
 ###################################################################
 
 echo "                                                            "
