@@ -23,6 +23,7 @@ Cho phép xác định tất cả các quyền khác nhau cho tất cả các pr
  * Process khác
 
 SELinux đặt các hạn chế đối với từng đối tượng theo các policy. Ví dụ với user apache chỉ có quyền truy cập với thư mục `/var/www/html`, nhưng không thể làm gì với các phần khác của hệ thống ví dụ như thư mục `/etc`. Như vậy kẻ tấn công không thể truy cập sang cái khác hoặc truy cập vào mạng LAN của ta.
+
 => Hạn chế được các hư hại
 
 SElinux cung cấp các tính năng bảo mật sau:
@@ -178,7 +179,9 @@ zoneminder	1.0.0
 zosremote	1.2.0
 ```
 
-**Show policy hoạt động**
+**Show boolean**
+
+Boolean cho phép ta thay đổi policy của SELinux trong khi nó đang chạy mà không cần reload lại các policy. Ví dụ ta cho phép service http truy cập vào DB mà không cần phải reload lại policy của selinux
 
 ```
 semanage boolean -l
@@ -349,3 +352,93 @@ Kiểm tra lại
 ```
 -rwxr-xr-x. root root unconfined_u:object_r:var_t:s0 index.html
 ```
+
+**Show các user có quyền truy cập role**
+
+Các `role` mà user có quyền truy cập
+
+Ví dụ với user `system_u`
+
+```
+[root@server www]# seinfo -usystem_u -x
+   system_u
+      default level: s0
+      range: s0 - s0:c0.c1023
+      roles:
+         object_r
+         system_r
+         unconfined_r
+```
+
+Tương tự ta có thể show các domain mà một role có thể truy cập
+
+Ví dụ với role `user_r`
+
+```
+seinfo -rsystem_r -x
+```
+
+```
+[root@server www]# seinfo -rsystem_r -x | head
+   system_r
+      Dominated Roles:
+         system_r
+      Types:
+         abrt_t
+         abrt_dump_oops_t
+         abrt_handle_event_t
+         abrt_helper_t
+         abrt_retrace_worker_t
+         abrt_retrace_coredump_t
+```
+
+## Troubshooting
+
+Ví dụ tôi không với user `guest_u` đang không được quyền thực thi các file
+
+```
+[demo0@server ~]$ ll
+total 4
+-rwx------. 1 demo0 demo0 48 10:14 26 Th07 script.sh
+
+[demo0@server ~]$ id -Z
+guest_u:guest_r:guest_t:s0
+
+[demo0@server ~]$ ./script.sh 
+-bash: ./script.sh: Permission denied
+```
+
+Chúng ta sử dụng lệnh sau để xem lỗi ở đâu
+
+```
+audit2allow -w -a
+```
+
+Ta thấy kết quả trả về như sau
+
+```
+...
+type=AVC msg=audit(1564373152.060:186): avc:  denied  { execute } for  pid=2463 comm="bash" name="script.sh" dev="dm-0" ino=13111127 scontext=guest_u:guest_r:guest_t:s0 tcontext=unconfined_u:object_r:user_home_t:s0 tclass=file permissive=0
+	Was caused by:
+	The boolean guest_exec_content was set incorrectly. 
+	Description:
+	Allow guest to exec content
+
+	Allow access by executing:
+	# setsebool -P guest_exec_content 1
+```
+
+Như vậy nếu muốn cho phép user `guest_u` thực thi file ta phải sử dụng lệnh
+
+```
+setsebool -P guest_exec_content 1
+```
+
+Bây giờ ta thử lại 
+
+```
+[demo0@server ~]$ ./script.sh 
+Đây là chương trình demo
+```
+
+**Lưu ý** các lệnh với selinux ta phải thực hiện trên user root hoặc user sudo
